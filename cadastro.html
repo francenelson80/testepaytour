@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<script type="text/javascript">
+
+	
+
+	function validacampos()
+	{
+		
+
+		//Embora a validação ocorra a nivel de formulário, tambem ocorrerá por javascript
+	
+
+		//alert('tamanho do arquivo: '+tamanho_arquivo);
+		
+		msg = '';
+		
+		//Validando o nome
+		if (document.form_cad.nome.value.length <=1)
+			msg += '- O seu nome precisa ser informado \n';
+
+		//Vlidando o email	
+		if (document.form_cad.email.value.length < 2)
+			msg += '- Email precisa ser informado \n';		
+		else
+			if(document.form_cad.email.value.indexOf('@') < 1)
+				msg += '- Email está no formato incorreto \n';
+
+		//Validando o fone
+		if (document.form_cad.fone.value.length <=1)
+			msg += '- O telefone precisa ser informado \n';	
+
+		//Validando o cargo
+		if (document.form_cad.cargo.value.length <=1)
+			msg += '- O cargo precisa ser informado \n';
+
+		//Validando o tamanho do arquivo
+		var arquivo = document.getElementById("curriculum"); // SELECIONA O ARQUIVO
+		tamanho_maximo = 1024*1024; //1MB
+
+		var file = arquivo.files[0];
+		tamanho_arquivo = file.size;
+
+		if (tamanho_arquivo > tamanho_maximo)
+			msg += '- O tamanho do arquivo está acima de 1MB \n';
+
+
+
+
+
+		if (msg != '' )
+		{					
+			alert('Ocorreram os seguintes erros de validação: \n' + msg);
+			return false;
+		}
+		
+
+		document.form_cad.submit();	
+		return true;
+
+	} //Final de function validacampos()
+
+	
+	
+</script>
+
+
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 
+		<title>Cadastro de Curriculum</title>
+
+		<!-- Google font -->
+		<link href="https://fonts.googleapis.com/css?family=Lato:700%7CMontserrat:400,600" rel="stylesheet">
+
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		
+		<!-- Font Awesome Icon -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+		<!-- Custom stlylesheet -->
+		<link type="text/css" rel="stylesheet" href="css/style.css"/>
+
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		<!-- jQuery Plugins -->
+		<script type="text/javascript" src="js/main.js"></script>
+
+    </head>
+	<body">
+	
+		
+
+		<!-- Hero-area -->
+		<div class="hero-area section">
+
+			<!-- Backgound Image -->
+			<div class="bg-image bg-parallax overlay" style="background-image:url(page-background.jpg)"></div>
+			<!-- /Backgound Image -->
+
+			<div class="container">
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1 text-center">
+						<h1 class="white-text">Cadastre-se para nossas vagas</h1>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- /Hero-area -->
+
+		<!-- Contact -->
+		<div id="contact" class="section">
+
+			<!-- container -->
+			<div class="container">
+
+				<!-- row -->
+				<div class="row">
+
+					<!-- contact form -->
+					<div class="col-md-6">
+						<div class="contact-form">							
+							<h4>Preencha os dados</h4>
+							<form action="salvar_cadastro.php" name="form_cad" id="form_cad" enctype="multipart/form-data" method="post">
+								<input class="input" type="text" name="nome" placeholder="Nome" maxlength="120" required>
+								<input class="input" type="email" name="email" placeholder="Email" maxlength="100" required>
+								<input class="input" type="tel" name="fone" placeholder="Telefone: (00)00000-0000" maxlength="14" 
+									pattern="\([0-9]{2}\)[0-9]{5}-[0-9]{4}" required>
+								<input class="input" type="text" name="cargo" placeholder="Cargo desejado" maxlength="100" required>
+								<label for="escolaridade">Escolaridade:</label><br>
+								<select class="input" id="escolaridade" name="escolaridade">
+									<option value="FUN">Ensino Fundamental</option>
+									<option value="MED">Ensino Médio</option>
+									<option value="SUP">Ensino Superior</option>
+									<option value="ESP">Especialização</option>
+									<option value="MES">Mestrado</option>
+									<option value="DOU">Doutorado</option>
+								</select>
+								<br><br>
+								<textarea class="input" name="obs" placeholder="Observações" maxlength="200"></textarea>
+								<label for="curriculum">Selecione o arquivo do curriculum:</label>
+								<input type="file" id="curriculum" name="curriculum" accept=".doc, .docx, .pdf" required>
+								<button class="main-button icon-button pull-right" onClick="javascript: return validacampos(form_cad);">Enviar</button>
+							</form>
+						</div>
+					</div>
+					<!-- /contact form -->
+
+					<!-- contact information -->
+					<div class="col-md-5 col-md-offset-1">
+						<h4>Informações de contato</h4>
+						<ul class="contact-details">
+							<li><i class="fa fa-envelope"></i>francenelson@hotmail.com</li>
+							<li><i class="fa fa-phone"></i>(84) 99802-7796</li>
+							
+						</ul>
+
+					</div>
+					<!-- contact information -->
+
+				</div>
+				<!-- /row -->
+
+			</div>
+			<!-- /container -->
+
+		</div>
+		<!-- /Contact -->
+
+		
+		<!-- preloader -->
+		<div id='preloader'><div class='preloader'></div></div>
+		<!-- /preloader -->
+
+
+
+
+	</body>
+</html>
